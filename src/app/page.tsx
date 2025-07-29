@@ -1,103 +1,139 @@
-import Image from "next/image";
+'use client';
 
-export default function Home() {
+import { useAuth } from '@/contexts/AuthContext';
+import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
+import Link from 'next/link';
+import { Button } from '@/components/ui/Button';
+import { Card } from '@/components/ui/Card';
+import { 
+  UsersIcon, 
+  CalendarIcon, 
+  CurrencyDollarIcon, 
+  ShieldCheckIcon 
+} from '@heroicons/react/24/outline';
+
+export default function HomePage() {
+  const { user, loading } = useAuth();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!loading && user) {
+      router.push('/dashboard');
+    }
+  }, [user, loading, router]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+      </div>
+    );
+  }
+
+  if (user) {
+    return null;
+  }
+
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <div className="min-h-screen bg-gray-50">
+      {/* Header */}
+      <header className="bg-white shadow-sm">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center py-6">
+            <div className="flex items-center">
+              <h1 className="text-2xl font-bold text-gray-900">Subscription Manager</h1>
+            </div>
+            <div className="flex items-center space-x-4">
+              <Link href="/login">
+                <Button variant="ghost">Sign In</Button>
+              </Link>
+              <Link href="/register">
+                <Button>Get Started</Button>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </header>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+      {/* Hero Section */}
+      <main>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <div className="text-center">
+            <h2 className="text-4xl font-extrabold text-gray-900 sm:text-5xl">
+              Manage Your Subscription Business
+            </h2>
+            <p className="mt-4 text-xl text-gray-600 max-w-3xl mx-auto">
+              Keep track of your clients, monitor renewals, and grow your subscription revenue with our comprehensive management platform.
+            </p>
+            <div className="mt-8 flex justify-center space-x-4">
+              <Link href="/register">
+                <Button size="lg">
+                  Start Free Trial
+                </Button>
+              </Link>
+              <Link href="/login">
+                <Button variant="secondary" size="lg">
+                  Sign In
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </div>
+
+        {/* Features */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
+            <Card>
+              <div className="text-center">
+                <div className="mx-auto h-12 w-12 flex items-center justify-center rounded-lg bg-blue-100">
+                  <UsersIcon className="h-6 w-6 text-blue-600" />
+                </div>
+                <h3 className="mt-4 text-lg font-medium text-gray-900">Client Management</h3>
+                <p className="mt-2 text-sm text-gray-500">
+                  Organize and manage all your subscription clients in one place.
+                </p>
+              </div>
+            </Card>
+
+            <Card>
+              <div className="text-center">
+                <div className="mx-auto h-12 w-12 flex items-center justify-center rounded-lg bg-green-100">
+                  <CalendarIcon className="h-6 w-6 text-green-600" />
+                </div>
+                <h3 className="mt-4 text-lg font-medium text-gray-900">Renewal Tracking</h3>
+                <p className="mt-2 text-sm text-gray-500">
+                  Never miss a renewal with automated tracking and notifications.
+                </p>
+              </div>
+            </Card>
+
+            <Card>
+              <div className="text-center">
+                <div className="mx-auto h-12 w-12 flex items-center justify-center rounded-lg bg-yellow-100">
+                  <CurrencyDollarIcon className="h-6 w-6 text-yellow-600" />
+                </div>
+                <h3 className="mt-4 text-lg font-medium text-gray-900">Revenue Analytics</h3>
+                <p className="mt-2 text-sm text-gray-500">
+                  Track your monthly recurring revenue and growth metrics.
+                </p>
+              </div>
+            </Card>
+
+            <Card>
+              <div className="text-center">
+                <div className="mx-auto h-12 w-12 flex items-center justify-center rounded-lg bg-purple-100">
+                  <ShieldCheckIcon className="h-6 w-6 text-purple-600" />
+                </div>
+                <h3 className="mt-4 text-lg font-medium text-gray-900">Secure & Reliable</h3>
+                <p className="mt-2 text-sm text-gray-500">
+                  Enterprise-grade security to protect your business data.
+                </p>
+              </div>
+            </Card>
+          </div>
         </div>
       </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
     </div>
   );
 }
