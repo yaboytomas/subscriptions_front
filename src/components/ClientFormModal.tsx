@@ -5,7 +5,6 @@ import { useForm } from 'react-hook-form';
 import { Client, ClientData, apiService, ApiError } from '@/lib/api';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
-import { Card } from '@/components/ui/Card';
 import { XMarkIcon } from '@heroicons/react/24/outline';
 import toast from 'react-hot-toast';
 
