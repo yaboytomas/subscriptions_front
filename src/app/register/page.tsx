@@ -34,12 +34,12 @@ export default function RegisterPage() {
     setLoading(true);
     try {
       await registerUser(data.name, data.email, data.password);
-      toast.success('Registration successful!');
+      toast.success('¡Registro exitoso!');
     } catch (error) {
       if (error instanceof ApiError) {
         toast.error(error.message);
       } else {
-        toast.error('An unexpected error occurred');
+        toast.error('Ocurrió un error inesperado');
       }
     } finally {
       setLoading(false);
@@ -47,15 +47,15 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gray-900 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
-        <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-          Create your account
+        <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-100">
+          Crea tu cuenta
         </h2>
-        <p className="mt-2 text-center text-sm text-gray-600">
-          Or{' '}
-          <Link href="/login" className="font-medium text-blue-600 hover:text-blue-500">
-            sign in to your existing account
+        <p className="mt-2 text-center text-sm text-gray-400">
+          O{' '}
+          <Link href="/login" className="font-medium text-blue-400 hover:text-blue-300">
+            inicia sesión en tu cuenta existente
           </Link>
         </p>
       </div>
@@ -64,59 +64,59 @@ export default function RegisterPage() {
         <Card>
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
             <Input
-              label="Full name"
+              label="Nombre completo"
               type="text"
               autoComplete="name"
               error={errors.name?.message}
               {...register('name', {
-                required: 'Name is required',
+                required: 'El nombre es requerido',
                 minLength: {
                   value: 2,
-                  message: 'Name must be at least 2 characters'
+                  message: 'El nombre debe tener al menos 2 caracteres'
                 },
                 maxLength: {
                   value: 50,
-                  message: 'Name must be less than 50 characters'
+                  message: 'El nombre debe tener menos de 50 caracteres'
                 }
               })}
             />
 
             <Input
-              label="Email address"
+              label="Dirección de correo electrónico"
               type="email"
               autoComplete="email"
               error={errors.email?.message}
               {...register('email', {
-                required: 'Email is required',
+                required: 'El email es requerido',
                 pattern: {
                   value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                  message: 'Invalid email address'
+                  message: 'Dirección de email inválida'
                 }
               })}
             />
 
             <Input
-              label="Password"
+              label="Contraseña"
               type="password"
               autoComplete="new-password"
               error={errors.password?.message}
               {...register('password', {
-                required: 'Password is required',
+                required: 'La contraseña es requerida',
                 minLength: {
                   value: 6,
-                  message: 'Password must be at least 6 characters'
+                  message: 'La contraseña debe tener al menos 6 caracteres'
                 }
               })}
             />
 
             <Input
-              label="Confirm password"
+              label="Confirmar contraseña"
               type="password"
               autoComplete="new-password"
               error={errors.confirmPassword?.message}
               {...register('confirmPassword', {
-                required: 'Please confirm your password',
-                validate: value => value === password || 'Passwords do not match'
+                required: 'Por favor confirma tu contraseña',
+                validate: value => value === password || 'Las contraseñas no coinciden'
               })}
             />
 
@@ -125,7 +125,7 @@ export default function RegisterPage() {
               loading={loading}
               className="w-full"
             >
-              Create account
+              Crear cuenta
             </Button>
           </form>
         </Card>

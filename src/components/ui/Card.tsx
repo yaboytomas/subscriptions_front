@@ -21,7 +21,7 @@ export const Card: React.FC<CardProps> = ({
   
   return (
     <div className={clsx(
-      'bg-white rounded-lg shadow-sm border border-gray-200',
+      'bg-gray-800 rounded-lg shadow-sm border border-gray-700',
       paddingClasses[padding],
       className
     )}>

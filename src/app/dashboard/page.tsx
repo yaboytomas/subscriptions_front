@@ -40,7 +40,7 @@ export default function DashboardPage() {
       if (error instanceof ApiError) {
         toast.error(error.message);
       } else {
-        toast.error('Failed to load clients');
+        toast.error('Error al cargar los clientes');
       }
     } finally {
       setLoading(false);
@@ -48,17 +48,17 @@ export default function DashboardPage() {
   };
 
   const handleDeleteClient = async (id: string) => {
-    if (!confirm('Are you sure you want to delete this client?')) return;
+    if (!confirm('¿Estás seguro de que quieres eliminar este cliente?')) return;
     
     try {
       await apiService.deleteClient(id);
       setClients(clients.filter(client => client._id !== id));
-      toast.success('Client deleted successfully');
+      toast.success('Cliente eliminado exitosamente');
     } catch (error) {
       if (error instanceof ApiError) {
         toast.error(error.message);
       } else {
-        toast.error('Failed to delete client');
+        toast.error('Error al eliminar el cliente');
       }
     }
   };
@@ -100,15 +100,15 @@ export default function DashboardPage() {
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">Clients</h1>
-            <p className="mt-1 text-sm text-gray-500">
-              Manage your subscription clients and their renewals
+            <h1 className="text-2xl font-bold text-gray-100">Clientes</h1>
+            <p className="mt-1 text-sm text-gray-400">
+              Gestiona tus clientes de suscripción y sus renovaciones
             </p>
           </div>
           <div className="mt-4 sm:mt-0">
             <Button onClick={() => setShowCreateModal(true)}>
               <PlusIcon className="h-4 w-4 mr-2" />
-              Add Client
+              Agregar Cliente
             </Button>
           </div>
         </div>
@@ -118,13 +118,13 @@ export default function DashboardPage() {
           <Card>
             <div className="flex items-center">
               <div className="flex-shrink-0">
-                                 <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
-                   <BuildingOfficeIcon className="h-5 w-5 text-blue-600" />
+                                 <div className="w-8 h-8 bg-blue-900 rounded-lg flex items-center justify-center">
+                   <BuildingOfficeIcon className="h-5 w-5 text-blue-400" />
                  </div>
               </div>
               <div className="ml-4">
-                <p className="text-sm font-medium text-gray-500">Total Clients</p>
-                <p className="text-2xl font-semibold text-gray-900">{clients.length}</p>
+                <p className="text-sm font-medium text-gray-400">Total Clientes</p>
+                <p className="text-2xl font-semibold text-gray-100">{clients.length}</p>
               </div>
             </div>
           </Card>
@@ -132,13 +132,13 @@ export default function DashboardPage() {
           <Card>
             <div className="flex items-center">
               <div className="flex-shrink-0">
-                                 <div className="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center">
-                   <CalendarIcon className="h-5 w-5 text-green-600" />
+                                 <div className="w-8 h-8 bg-green-900 rounded-lg flex items-center justify-center">
+                   <CalendarIcon className="h-5 w-5 text-green-400" />
                  </div>
               </div>
               <div className="ml-4">
-                <p className="text-sm font-medium text-gray-500">Upcoming Renewals</p>
-                <p className="text-2xl font-semibold text-gray-900">{getUpcomingRenewals().length}</p>
+                <p className="text-sm font-medium text-gray-400">Próximas Renovaciones</p>
+                <p className="text-2xl font-semibold text-gray-100">{getUpcomingRenewals().length}</p>
               </div>
             </div>
           </Card>
@@ -146,13 +146,13 @@ export default function DashboardPage() {
           <Card>
             <div className="flex items-center">
               <div className="flex-shrink-0">
-                                 <div className="w-8 h-8 bg-yellow-100 rounded-lg flex items-center justify-center">
-                   <BuildingOfficeIcon className="h-5 w-5 text-yellow-600" />
+                                 <div className="w-8 h-8 bg-yellow-900 rounded-lg flex items-center justify-center">
+                   <BuildingOfficeIcon className="h-5 w-5 text-yellow-400" />
                  </div>
               </div>
               <div className="ml-4">
-                <p className="text-sm font-medium text-gray-500">Monthly Revenue</p>
-                <p className="text-2xl font-semibold text-gray-900">${getTotalRevenue().toLocaleString()}</p>
+                <p className="text-sm font-medium text-gray-400">Ingresos Mensuales</p>
+                <p className="text-2xl font-semibold text-gray-100">${getTotalRevenue().toLocaleString()}</p>
               </div>
             </div>
           </Card>
@@ -164,7 +164,7 @@ export default function DashboardPage() {
              <MagnifyingGlassIcon className="h-5 w-5 text-gray-400" />
            </div>
           <Input
-            placeholder="Search clients..."
+            placeholder="Buscar clientes..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             className="pl-10"
@@ -174,27 +174,27 @@ export default function DashboardPage() {
         {/* Clients List */}
         <Card>
           <div className="overflow-hidden">
-            <table className="min-w-full divide-y divide-gray-200">
-              <thead className="bg-gray-50">
+            <table className="min-w-full divide-y divide-gray-600">
+              <thead className="bg-gray-700">
                 <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Client
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
+                    Cliente
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Company
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
+                    Empresa
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Renewal Date
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
+                    Fecha de Renovación
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Amount
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
+                    Cantidad
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Actions
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
+                    Acciones
                   </th>
                 </tr>
               </thead>
-              <tbody className="bg-white divide-y divide-gray-200">
+              <tbody className="bg-gray-800 divide-y divide-gray-600">
                 {filteredClients.map((client) => {
                   const renewalDate = new Date(client.subscriptionRenewalDate);
                   const isUpcoming = renewalDate <= new Date(Date.now() + 30 * 24 * 60 * 60 * 1000);

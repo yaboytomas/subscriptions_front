@@ -29,12 +29,12 @@ export default function LoginPage() {
     setLoading(true);
     try {
       await login(data.email, data.password);
-      toast.success('Login successful!');
+      toast.success('¡Inicio de sesión exitoso!');
     } catch (error) {
       if (error instanceof ApiError) {
         toast.error(error.message);
       } else {
-        toast.error('An unexpected error occurred');
+        toast.error('Ocurrió un error inesperado');
       }
     } finally {
       setLoading(false);
@@ -42,15 +42,15 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gray-900 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
-        <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-          Sign in to your account
+        <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-100">
+          Inicia sesión en tu cuenta
         </h2>
-        <p className="mt-2 text-center text-sm text-gray-600">
-          Or{' '}
-          <Link href="/register" className="font-medium text-blue-600 hover:text-blue-500">
-            create a new account
+        <p className="mt-2 text-center text-sm text-gray-400">
+          O{' '}
+          <Link href="/register" className="font-medium text-blue-400 hover:text-blue-300">
+            crea una nueva cuenta
           </Link>
         </p>
       </div>
@@ -59,37 +59,37 @@ export default function LoginPage() {
         <Card>
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
             <Input
-              label="Email address"
+              label="Dirección de correo electrónico"
               type="email"
               autoComplete="email"
               error={errors.email?.message}
               {...register('email', {
-                required: 'Email is required',
+                required: 'El email es requerido',
                 pattern: {
                   value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                  message: 'Invalid email address'
+                  message: 'Dirección de email inválida'
                 }
               })}
             />
 
             <Input
-              label="Password"
+              label="Contraseña"
               type="password"
               autoComplete="current-password"
               error={errors.password?.message}
               {...register('password', {
-                required: 'Password is required',
+                required: 'La contraseña es requerida',
                 minLength: {
                   value: 6,
-                  message: 'Password must be at least 6 characters'
+                  message: 'La contraseña debe tener al menos 6 caracteres'
                 }
               })}
             />
 
             <div className="flex items-center justify-between">
               <div className="text-sm">
-                <Link href="/forgot-password" className="font-medium text-blue-600 hover:text-blue-500">
-                  Forgot your password?
+                <Link href="/forgot-password" className="font-medium text-blue-400 hover:text-blue-300">
+                  ¿Olvidaste tu contraseña?
                 </Link>
               </div>
             </div>
@@ -99,7 +99,7 @@ export default function LoginPage() {
               loading={loading}
               className="w-full"
             >
-              Sign in
+              Iniciar sesión
             </Button>
           </form>
         </Card>
